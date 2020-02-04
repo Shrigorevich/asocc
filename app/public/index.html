@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <section class="first">
+        <div class="jtron">
+            <div class="container">
+                <h1 class="display-4">Create your PC</h1>
+                <hr>
+                <p class="lead">Do not know how to choose the right parts for your computer? Just choose an existing part and then we will do it all ourselves.</p>
+            </div>
+        </div>
+        <header id="header">
+            <nav>
+                <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                        <span class="nav-link" data-value="videocards" data-queue="0" data-sort="null">VIDEOCARDS</span>
+                    </li>
+                    <li class="nav-item">
+                        <span class="nav-link" data-value="processors" data-queue="0" data-sort="null">CPU</span>
+                    </li>
+                    <li class="nav-item">
+                        <span class="nav-link" data-value="motherboards" data-queue="0" data-sort="null">MOTHERBOARDS</span>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <span class="nav-link" data-value="memory" data-queue="0" data-sort="null">MEMORY</span>
+                    </li> -->
+                </ul>
+            </nav>
+        </header>
+    </section>
+
+    <section>
+        <main class="row py-4">
+            <div class="col table_wrapper p-0">
+                <table id="table" border="1" bordercolor="#E54A4A" data-class="">
+                    <thead></thead>
+                    <tbody id='items'>
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-4 p-0" >
+                <div id="constructor" data-blocker="">
+                    <div id="dropdawn" class="cHead dropdawn">
+                        <!-- flex-direction: column; justify-content: center; -->
+                        <span id="find"><i class="fas fa-cog fa-lg" id="cog"></i></span>
+                        <h5 class='my-0 mx-1'>Constructor</h4>
+
+                        <div id="finder" class="dropdawn-content">
+                            <span data-value="videocard">Videocard</span>
+                            <span data-value="processor">Processor</span>
+                            <span data-value="motherboard">Motherboard</span>
+                        </div>
+                    </div>
+                    <div id='cBody'>
+
+                    </div>
+                </div>
+                <div id="found-modules" class="row">
+
+                </div>
+
+            </div>
+        </main>
+    </section>
+
+    <script id="found-videocards" type="text/template">
+        {{#data}}
+        <div class="col-6 found-item-wrapper">
+            <div data-name="{{name}}" data-mark="{{mark}}" data-bus="{{bus}}" data-memory="{{memory}}" data-code="0" class="found-item">
+                <p>name: {{name}}</p>
+                <p>mark: {{mark}}</p>
+                <p>bus: {{bus}}</p>
+                <p>memory: {{memory}}</p>
+            </div>
+        </div>
+        {{/data}}
+    </script>
+
+    <script id="found-processors" type="text/template">
+        {{#data}}
+        <div class="col-6 found-item-wrapper">
+            <div data-name="{{name}}" data-mark="{{mark}}" data-socket="{{socket}}" data-speed="{{speed}}" data-turbo="{{turbo}}" data-code="1" class="found-item">
+                <p>name: {{name}}</p>
+                <p>mark: {{mark}}</p>
+                <p>socket: {{socket}}</p>
+                <p>speed: {{speed}}</p>
+                <p>turbo: {{turbo}}</p>
+            </div>
+        </div>
+        {{/data}}
+    </script>
+
+    <script id="found-motherboards" type="text/template">
+        {{#data}}
+        <div class="col-6 found-item-wrapper">
+            <div data-name="{{name}}" data-socket="{{socket}}" data-chipset="{{chipset}}" data-bus="{{bus}}" data-ram="{{ram}}" data-speed="{{speed}}" data-code="2" class="found-item">
+                <p>name: {{name}}</p>
+                <p>socket: {{socket}}</p>
+                <p>memory: {{chipset}}</p>
+                <p>chipset: {{bus}}</p>
+                <p>ram: {{ram}}</p>
+                <p>speed: {{speed}}</p>
+            </div>
+        </div>
+        {{/data}}
+    </script>
+
+    <!-- TABLE TEMPLATES -->
+    <script id='videocards' type="text/template">
+        {{#data}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{bus}}</td>
+                <td>{{memory}}</td>
+                <td>{{mark}}</td>
+                <td class="add" data-name="{{name}}" data-mark="{{mark}}" data-bus="{{bus}}" data-memory="{{memory}}" data-code="0">+</td>
+            </tr>
+        {{/data}}
+    </script>
+
+    <script id='processors' type="text/template">
+        {{#data}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{socket}}</td>
+                <td>{{speed}}</td>
+                <td>{{turbo}}</td>
+                <td>{{mark}}</td>
+                <td class="add" data-name="{{name}}" data-mark="{{mark}}" data-socket="{{socket}}" data-speed="{{speed}}" data-turbo="{{turbo}}" data-code="1">+</td>
+            </tr>
+        {{/data}}
+    </script>
+    <script id='motherboards' type="text/template">
+        {{#data}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{socket}}</td>
+                <td>{{chipset}}</td>
+                <td>{{bus}}</td>
+                <td>{{ram}}</td>
+                <td>{{speed}}</td>
+                <td class="add" data-name="{{name}}" data-socket="{{socket}}" data-chipset="{{chipset}}" data-bus="{{bus}}" data-ram="{{ram}}" data-speed="{{speed}}" data-code="2">+</td>
+            </tr>
+        {{/data}}
+    </script>
+    <!-- TABLE TEMPLATES -->
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/script.js"></script>
+
+    <script src="https://kit.fontawesome.com/05aa50e714.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.0/mustache.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.cycle/3.0.3/jquery.cycle.all.min.js"></script>
+
+</body>
+
+</html>
