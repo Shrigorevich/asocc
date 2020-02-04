@@ -8,7 +8,7 @@ const rp = require('request-promise');
 const app = express();
 const server = http.createServer(app)
 const io = socketIO(server)
-const port = 8000;
+const port = process.env.PORT || 80;
 
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -41,7 +41,7 @@ function sql_req(tableName, constructor){
     }else if(tableName == "processor"){
         return `SELECT * FROM ${tableName}s WHERE mark*1.2>${constructor.videocard.mark} ORDER BY mark ASC LIMIT 4`
     }else if(tableName == "motherboard"){
-        
+
     }
 }
 
