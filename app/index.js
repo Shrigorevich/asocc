@@ -37,11 +37,17 @@ function Constructor(){
 function sql_req(tableName, constructor){
     console.log('sql_req');
     if(tableName == "videocard"){
-        return  `SELECT * FROM ${tableName}s WHERE mark<${constructor.processor.mark*1.2} ORDER BY mark DESC LIMIT 4`
+        return constructor.motherboard && constructor.processor ? `SELECT * FROM videocards WHERE mark<${constructor.processor.mark*1.2} AND bus LIKE '%${constructor.motherboard.bus}%' ORDER BY mark DESC LIMIT 4` :
+        constructor.processor ? `SELECT * FROM videocards WHERE mark<${constructor.processor.mark*1.2} ORDER BY mark DESC LIMIT 4` :
+        `SELECT * FROM videocards WHERE bus LIKE '%${constructor.motherboard.bus}%' ORDER BY mark DESC LIMIT 4`
     }else if(tableName == "processor"){
-        return `SELECT * FROM ${tableName}s WHERE mark*1.2>${constructor.videocard.mark} ORDER BY mark ASC LIMIT 4`
+        return constructor.motherboard && constructor.videocard ? `SELECT * FROM processors WHERE mark*1.2>${constructor.videocard.mark} AND lower(socket) LIKE lower('%${constructor.motherboard.socket}%') ORDER BY mark ASC LIMIT 4` :
+        constructor.motherboard ? `SELECT * FROM processors WHERE lower(socket) LIKE lower('%${constructor.motherboard.socket}%') ORDER BY mark ASC LIMIT 4` :
+        `SELECT * FROM processors WHERE mark*1.2>${constructor.videocard.mark} ORDER BY mark ASC LIMIT 4`
     }else if(tableName == "motherboard"){
-
+        return constructor.videocard && constructor.processor ? `SELECT * FROM motherboards WHERE lower(socket) LIKE lower('%${constructor.processor.socket}%') AND '${constructor.videocard.bus}' LIKE ('%' || bus || '%')` :
+        constructor.videocard ? `SELECT * FROM motherboards WHERE '${constructor.videocard.bus}' LIKE ('%' || bus || '%')` :
+        `SELECT * FROM motherboards WHERE lower(socket) LIKE lower('%${constructor.processor.socket}%')`
     }
 }
 
@@ -57,7 +63,7 @@ function finder(tableName, constructor){
         })
         const sql = sql_req(tableName, constructor);
         pool.query(sql, (err, res) => {
-            resolve(res.rows);
+            err ? console.log(err) : resolve(res.rows);
         });
         pool.end()
     })
