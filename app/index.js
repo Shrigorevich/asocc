@@ -54,11 +54,11 @@ function finder(tableName, constructor){
     console.log('finder');
     return new Promise((resolve, reject) => {
         const pool = new Pool({
-           host: '127.0.0.1',
+           host: 'ec2-35-168-54-239.compute-1.amazonaws.com',
            port: 5432,
-           database: 'modules',
-           user: 'admin',
-           password: '456385',
+           database: 'd4u5ur7f12iptk',
+           user: 'gyvfrthtmnolvd',
+           password: '16d4e74cfd7c35375c733c6dc6aaea6c8fe7daa0f6c6a1f7469c90c3a682aee2',
         })
         const sql = sql_req(tableName, constructor);
         pool.query(sql, (err, res) => {
@@ -88,11 +88,11 @@ io.on('connection', (socket) => {
         if (!buffer || value != data.value){
             value = data.value;
             const pool = new Pool({
-               host: '127.0.0.1',
+               host: 'ec2-35-168-54-239.compute-1.amazonaws.com',
                port: 5432,
-               database: 'modules',
-               user: 'admin',
-               password: '456385',
+               database: 'd4u5ur7f12iptk',
+               user: 'gyvfrthtmnolvd',
+               password: '16d4e74cfd7c35375c733c6dc6aaea6c8fe7daa0f6c6a1f7469c90c3a682aee2',
             })
             const sql =  `SELECT * FROM ${value};`;
             pool.query(sql, (err, res) => {
@@ -108,11 +108,11 @@ io.on('connection', (socket) => {
     socket.on('nameMatching', function(data){
         console.log(data.inputValue);
         const pool = new Pool({
-           host: '127.0.0.1',
+           host: 'ec2-35-168-54-239.compute-1.amazonaws.com',
            port: 5432,
-           database: 'modules',
-           user: 'admin',
-           password: '456385',
+           database: 'd4u5ur7f12iptk',
+           user: 'gyvfrthtmnolvd',
+           password: '16d4e74cfd7c35375c733c6dc6aaea6c8fe7daa0f6c6a1f7469c90c3a682aee2',
         })
         const sortingColumn = data.tableName == 'motherboards' ? 'speed' : 'mark'
         const sql =  `SELECT * FROM ${data.tableName} WHERE lower(name) LIKE lower('%${data.inputValue}%') ORDER BY ${sortingColumn} DESC ;`;
