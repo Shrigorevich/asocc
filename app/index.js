@@ -10,7 +10,6 @@ const server = http.createServer(app)
 const io = socketIO(server)
 const port = process.env.PORT || 80;
 
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 server.listen(port, function() {
